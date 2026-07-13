@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -23,6 +24,7 @@
                             900: '#0B132B',
                             800: '#1C2541',
                             700: '#3A506B',
+                            50: '#F0F4F8'
                         },
                         coral: {
                             450: '#FF7C6B',
@@ -47,16 +49,23 @@
         /* Custom smooth scroll and scrollbar */
         html {
             scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
             background: #0B132B;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1C2541;
+            background: #cbd5e1;
             border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #1C2541;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #FF6B6B;
@@ -97,51 +106,69 @@
             animation: floatEffect 6s ease-in-out infinite;
         }
 
-        /* Glassmorphism utility */
+        /* Adaptive Glassmorphism utility */
         .glass-panel {
-            background: rgba(28, 37, 65, 0.45);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .dark .glass-panel {
+            background: rgba(28, 37, 65, 0.45);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Interactive Card Glow Effect */
+        /* Interactive Card Glow Effects for Light/Dark modes */
         .glow-card-coral {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glow-card-coral:hover {
-            box-shadow: 0 10px 30px -10px rgba(255, 107, 107, 0.35);
-            border-color: rgba(255, 107, 107, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(255, 107, 107, 0.2);
+            border-color: rgba(255, 107, 107, 0.4);
             transform: translateY(-4px);
         }
+        .dark .glow-card-coral:hover {
+            box-shadow: 0 10px 30px -10px rgba(255, 107, 107, 0.35);
+            border-color: rgba(255, 107, 107, 0.5);
+        }
+
         .glow-card-neon {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glow-card-neon:hover {
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-4px);
+        }
+        .dark .glow-card-neon:hover {
             box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.35);
             border-color: rgba(16, 185, 129, 0.5);
-            transform: translateY(-4px);
         }
     </style>
 </head>
-<body class="bg-navy-950 text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-coral-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 dark:bg-navy-950 dark:text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-coral-500 selection:text-white transition-colors duration-300">
 
-    <!-- Navigation -->
+    <!-- Navigation Header -->
     <header class="fixed top-0 w-full z-50 glass-panel transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-coral-450 to-neonGreen-400">
-                KIM TAE IN <span class="text-xs text-slate-400 font-medium ml-1">SSAFY 6반</span>
+            <a href="#" class="text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-coral-450 to-neonGreen-500 dark:to-neonGreen-400">
+                KIM TAE IN <span class="text-xs text-slate-500 dark:text-slate-400 font-medium ml-1">SSAFY 6반</span>
             </a>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
-                <a href="#hero" class="hover:text-coral-450 transition-colors">슬로건</a>
-                <a href="#about" class="hover:text-neonGreen-400 transition-colors">자기소개</a>
-                <a href="#values" class="hover:text-coral-450 transition-colors">나의 가치관</a>
-                <a href="#simulator" class="hover:text-neonGreen-400 transition-colors">회복 시뮬레이터</a>
-                <a href="#portfolio" class="hover:text-coral-450 transition-colors">프로젝트</a>
-                <a href="#outro" class="hover:text-neonGreen-400 transition-colors">다짐</a>
+            <nav class="hidden lg:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#hero" class="hover:text-coral-500 dark:hover:text-coral-450 transition-colors">슬로건</a>
+                <a href="#about" class="hover:text-neonGreen-600 dark:hover:text-neonGreen-400 transition-colors">자기소개</a>
+                <a href="#values" class="hover:text-coral-500 dark:hover:text-coral-450 transition-colors">나의 가치관</a>
+                <a href="#simulator" class="hover:text-neonGreen-600 dark:hover:text-neonGreen-400 transition-colors">회복 시뮬레이터</a>
+                <a href="#portfolio" class="hover:text-coral-500 dark:hover:text-coral-450 transition-colors">프로젝트</a>
+                <a href="#outro" class="hover:text-neonGreen-600 dark:hover:text-neonGreen-400 transition-colors">다짐</a>
             </nav>
-            <div class="flex items-center space-x-3">
-                <button onclick="cheerUp()" class="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-500 text-white font-bold text-xs px-4 py-2 rounded-full shadow-lg hover:shadow-coral-500/20 active:scale-95 transition-all">
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-200/60 dark:bg-navy-800/80 hover:bg-slate-300/60 dark:hover:bg-navy-700/80 transition-all text-slate-600 dark:text-yellow-400 border border-slate-300/30 dark:border-slate-700/50" aria-label="Toggle Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+                <button onclick="cheerUp()" class="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-500 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-lg hover:shadow-coral-500/20 active:scale-95 transition-all">
                     🔥 응원하기
                 </button>
             </div>
@@ -150,30 +177,30 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-24 overflow-hidden">
-        <!-- Visual Background elements -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#1e293b,transparent_60%)] opacity-35"></div>
-        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-neonGreen-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-coral-500/10 rounded-full blur-3xl"></div>
+        <!-- Visual Background elements adapting to Theme -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#e2e8f0,transparent_60%)] dark:bg-[radial-gradient(circle_at_30%_30%,#1e293b,transparent_60%)] opacity-35 transition-colors duration-300"></div>
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-neonGreen-500/5 dark:bg-neonGreen-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-coral-500/5 dark:bg-coral-500/10 rounded-full blur-3xl"></div>
 
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center z-10 w-full">
             <!-- Text Content -->
             <div class="lg:col-span-7 text-left space-y-6 animate-fade-in">
                 <!-- Welcome tag -->
-                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-navy-800/80 border border-slate-700/50">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-slate-200/80 dark:bg-navy-800/80 border border-slate-300/50 dark:border-slate-700/50">
                     <span class="w-2.5 h-2.5 rounded-full bg-neonGreen-500 animate-ping"></span>
-                    <span class="text-xs font-semibold text-slate-300">SSAFY 서울 6반을 위한 쇼케이스</span>
+                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">SSAFY 서울 6반을 위한 쇼케이스</span>
                 </div>
 
                 <!-- Dynamic Slogans Container -->
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
-                    <span class="block text-slate-400 text-2xl md:text-3xl font-bold mb-3">태인이가 지향하는 코드의 모습</span>
-                    <span id="typing-text" class="typing-cursor text-transparent bg-clip-text bg-gradient-to-r from-coral-450 via-white to-neonGreen-400"></span>
+                    <span class="block text-slate-500 dark:text-slate-400 text-2xl md:text-3xl font-bold mb-3">태인이가 지향하는 코드의 모습</span>
+                    <span id="typing-text" class="typing-cursor text-transparent bg-clip-text bg-gradient-to-r from-coral-500 via-slate-800 to-neonGreen-600 dark:from-coral-450 dark:via-white dark:to-neonGreen-400"></span>
                 </h1>
 
                 <!-- Message Block -->
-                <p class="text-base md:text-lg text-slate-400 leading-relaxed max-w-2xl">
+                <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
                     "내가 이해한 것만, 내가 알아볼 수 있게 코딩하며,<br class="hidden sm:inline">
-                    오늘 하루를 마지막처럼 즐겁고 뜨겁게 채워가는 개발자 <span class="text-white font-bold underline decoration-coral-450 decoration-2">김태인</span>입니다."
+                    오늘 하루를 마지막처럼 즐겁고 뜨겁게 채워가는 개발자 <span class="text-slate-900 dark:text-white font-bold underline decoration-coral-500 dark:decoration-coral-450 decoration-2">김태인</span>입니다."
                 </p>
 
                 <!-- Actions -->
@@ -181,20 +208,18 @@
                     <a href="#values" class="w-full sm:w-auto bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-500 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-coral-500/10 hover:shadow-coral-500/20 active:scale-95 transition-all text-center">
                         가치관 확인하기 <i class="fa-solid fa-arrow-down ml-2"></i>
                     </a>
-                    <a href="#simulator" class="w-full sm:w-auto bg-navy-800 hover:bg-navy-700 text-slate-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl border border-slate-700 hover:border-slate-600 transition-all text-center">
+                    <a href="#simulator" class="w-full sm:w-auto bg-slate-200 dark:bg-navy-800 hover:bg-slate-300 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-semibold px-8 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 transition-all text-center">
                         긍정 멘탈 시뮬레이터 🛠️
                     </a>
                 </div>
             </div>
 
-            <!-- Beautiful Developer Illustration SVG (Replaces generic placeholder images) -->
+            <!-- Beautiful Developer Illustration SVG -->
             <div class="lg:col-span-5 flex justify-center items-center animate-float">
                 <svg class="w-full max-w-[420px]" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Tech background ring -->
                     <circle cx="250" cy="250" r="180" stroke="#10B981" stroke-width="2" stroke-dasharray="10 15" opacity="0.4" />
                     <circle cx="250" cy="250" r="210" stroke="#FF6B6B" stroke-width="1" opacity="0.2" />
                     
-                    <!-- Decorative Floating Code Brackets -->
                     <g fill="#10B981" opacity="0.8">
                         <text x="50" y="150" font-family="monospace" font-size="28" font-weight="bold">&lt;/&gt;</text>
                         <text x="380" y="380" font-family="monospace" font-size="24" font-weight="bold">{ }</text>
@@ -204,17 +229,13 @@
                         <text x="60" y="360" font-family="monospace" font-size="22" font-weight="bold">map()</text>
                     </g>
                     
-                    <!-- Main Workstation Terminal Box -->
                     <rect x="100" y="140" width="300" height="220" rx="16" fill="#1C2541" stroke="#3A506B" stroke-width="4" filter="drop-shadow(0px 20px 40px rgba(0,0,0,0.5))"/>
-                    <!-- Terminal Top Bar -->
                     <path d="M100 156C100 147.163 107.163 140 116 140H384C392.837 140 400 147.163 400 156V175H100V156Z" fill="#0B132B"/>
-                    <!-- Window Controls -->
                     <circle cx="125" cy="157" r="6" fill="#FF5F56"/>
                     <circle cx="145" cy="157" r="6" fill="#FFBD2E"/>
                     <circle cx="165" cy="157" r="6" fill="#27C93F"/>
                     <text x="210" y="161" fill="#64748B" font-family="monospace" font-size="12" font-weight="bold">taein-workspace.js</text>
 
-                    <!-- Terminal Code Lines -->
                     <g font-family="monospace" font-size="13" font-weight="bold">
                         <text x="120" y="210" fill="#E85A5A">import</text>
                         <text x="175" y="210" fill="#FFFFFF">{ persistence } from 'taein-mind';</text>
@@ -226,11 +247,10 @@
                         <text x="195" y="270" fill="#4EFEBC">onBugTrigger()</text>
                         <text x="315" y="270" fill="#FFFFFF"> {</text>
                         <text x="140" y="300" fill="#FF8A7A">return</text>
-                        <text x="195" y="300" fill="#4EFEBC">"그럴 수 있지 뭐, 고치자!"</text>
+                        <text x="195" y="300" fill="#4EFEBC">"어쩔 수 없지 뭐, 고치자!"</text>
                         <text x="120" y="330" fill="#FFFFFF">}</text>
                     </g>
                     
-                    <!-- Code block decorative cursor -->
                     <rect x="350" y="288" width="8" height="15" fill="#4EFEBC" opacity="0.8">
                         <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
                     </rect>
@@ -240,18 +260,18 @@
     </section>
 
     <!-- Profile Introduction Section (Major, Likes, Experience) -->
-    <section id="about" class="py-24 px-6 relative bg-navy-950/60 border-t border-slate-800/40">
+    <section id="about" class="py-24 px-6 relative bg-slate-100/40 dark:bg-navy-950/60 border-t border-slate-200/50 dark:border-slate-800/40 transition-colors">
         <div class="max-w-6xl mx-auto">
             <!-- Header of Section -->
             <div class="text-center mb-16">
-                <span class="text-xs font-bold tracking-widest text-coral-450 uppercase bg-coral-500/10 px-3 py-1.5 rounded-full">
+                <span class="text-xs font-bold tracking-widest text-coral-500 dark:text-coral-450 uppercase bg-coral-500/10 px-3 py-1.5 rounded-full">
                     About Me
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-4">
                     태인이를 소개합니다 🙋‍♂️
                 </h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-coral-500 to-neonGreen-500 mx-auto rounded"></div>
-                <p class="text-slate-400 mt-4 max-w-xl mx-auto text-sm md:text-base">
+                <p class="text-slate-500 dark:text-slate-400 mt-4 max-w-xl mx-auto text-sm md:text-base">
                     "개발"이라는 도화지에 첫 획을 긋는, SSAFY 서울 6반 김태인의 진솔한 프로필
                 </p>
             </div>
@@ -261,11 +281,11 @@
                 <!-- Major Card -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-coral flex flex-col items-center text-center relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-coral-500/5 rounded-full blur-xl group-hover:bg-coral-500/10 transition-all"></div>
-                    <div class="w-14 h-14 bg-coral-500/10 text-coral-450 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
+                    <div class="w-14 h-14 bg-coral-500/10 text-coral-500 dark:text-coral-450 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">전공: 경제학과</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3">전공: 경제학과</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         복잡한 현상 속에서 데이터를 바탕으로 논리를 추론하는 방법을 훈련했습니다. 문제를 쪼개서 분석하고 인과관계를 밝히는 뇌는 코드를 견고하게 설계하는 데 든든한 밑거름이 됩니다.
                     </p>
                 </div>
@@ -273,15 +293,15 @@
                 <!-- Hobbies Card -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-neon flex flex-col items-center text-center relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-neonGreen-500/5 rounded-full blur-xl group-hover:bg-neonGreen-500/10 transition-all"></div>
-                    <div class="w-14 h-14 bg-neonGreen-500/10 text-neonGreen-400 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
+                    <div class="w-14 h-14 bg-neonGreen-500/10 text-neonGreen-600 dark:text-neonGreen-400 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
                         <div class="flex gap-1.5">
                             <i class="fa-solid fa-basketball"></i>
-                            <span class="text-xs text-slate-500 font-normal">/</span>
+                            <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">/</span>
                             <i class="fa-solid fa-gamepad"></i>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">좋아하는 것: 농구 & 게임</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3">좋아하는 것: 농구 & 게임</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         팀원들과 수없이 패스를 주고받으며 멋진 골을 완성해 내는 <strong>농구</strong>를 사랑합니다. 난관에 막혀도 포기하지 않고 공략법을 찾아 클리어하는 <strong>게임</strong>처럼 고난도 버그 공략도 언제든 즐길 준비가 되어있습니다.
                     </p>
                 </div>
@@ -289,11 +309,11 @@
                 <!-- Experience Card -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-coral flex flex-col items-center text-center relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-coral-500/5 rounded-full blur-xl group-hover:bg-coral-500/10 transition-all"></div>
-                    <div class="w-14 h-14 bg-coral-500/10 text-coral-450 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
+                    <div class="w-14 h-14 bg-coral-500/10 text-coral-500 dark:text-coral-450 flex items-center justify-center rounded-2xl mb-6 text-2xl group-hover:scale-110 transition-all duration-300">
                         <i class="fa-solid fa-magnifying-glass-chart"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">개발 경험: 새로운 도전</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3">개발 경험: 새로운 도전</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         데이터를 다루는 분석과 화려한 시각화는 깊이 있게 다뤄 보았지만, 본격적인 소프트웨어 제품 개발은 이번이 생애 첫걸음입니다. 백지상태이기에 편견 없이 더 유연하고 무섭게 기술을 흡수하고 있습니다!
                     </p>
                 </div>
@@ -302,15 +322,15 @@
     </section>
 
     <!-- Core Values Section -->
-    <section id="values" class="py-24 px-6 relative bg-navy-900/40">
+    <section id="values" class="py-24 px-6 relative bg-slate-100/10 dark:bg-navy-900/40 transition-colors">
         <div class="max-w-6xl mx-auto">
             <!-- Header of Section -->
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-                    나의 주요 포인트!
+                    My Core Values & Mindset
                 </h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-coral-500 to-neonGreen-500 mx-auto rounded"></div>
-                <p class="text-slate-400 mt-4 max-w-lg mx-auto text-sm md:text-base">
+                <p class="text-slate-500 dark:text-slate-400 mt-4 max-w-lg mx-auto text-sm md:text-base">
                     SSAFY 동료들이라면 공감할 수밖에 없는 저만의 무기이자 성장을 이끄는 3가지 매력 포인트입니다.
                 </p>
             </div>
@@ -320,16 +340,16 @@
                 <!-- Value 1: 집요함 -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-coral relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-coral-500/5 rounded-full blur-xl group-hover:bg-coral-500/10 transition-all"></div>
-                    <div class="w-12 h-12 bg-coral-500/10 text-coral-450 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
+                    <div class="w-12 h-12 bg-coral-500/10 text-coral-500 dark:text-coral-450 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
                         01
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-bullseye text-coral-450"></i> 포기 없는 집요함
+                    <h3 class="text-xl font-bold text-slate-850 dark:text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye text-coral-500 dark:text-coral-450"></i> 포기 없는 집요함
                     </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
                         동작 원리를 완벽하게 분석하고 에러의 실마리를 잡기 위해 끝까지 몰입합니다. 내가 이해해야 정교한 코드가 나온다는 굳은 믿음으로, 원인 불명의 오류 앞에서 더 깊게 물고 늘어집니다.
                     </p>
-                    <div class="text-xs text-coral-450 font-semibold uppercase tracking-wider">
+                    <div class="text-xs text-coral-500 dark:text-coral-450 font-semibold uppercase tracking-wider">
                         #해결할_때까지_안잠
                     </div>
                 </div>
@@ -337,16 +357,16 @@
                 <!-- Value 2: 열정 -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-neon relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-neonGreen-500/5 rounded-full blur-xl group-hover:bg-neonGreen-500/10 transition-all"></div>
-                    <div class="w-12 h-12 bg-neonGreen-500/10 text-neonGreen-400 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
+                    <div class="w-12 h-12 bg-neonGreen-500/10 text-neonGreen-600 dark:text-neonGreen-400 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
                         02
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-fire text-neonGreen-400"></i> 타협 없는 퀄리티
+                    <h3 class="text-xl font-bold text-slate-850 dark:text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-neonGreen-600 dark:text-neonGreen-400"></i> 타협 없는 퀄리티
                     </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
                         단순히 "동작하니까 됐다"에 머무르지 않습니다. 코드 구조의 정돈됨, 더 가독성 높고 이해하기 쉬운 코드가 최적의 협업을 이끈다고 믿기 때문에 디테일 한 조각까지 심혈을 기울입니다.
                     </p>
-                    <div class="text-xs text-neonGreen-400 font-semibold uppercase tracking-wider">
+                    <div class="text-xs text-neonGreen-600 dark:text-neonGreen-400 font-semibold uppercase tracking-wider">
                         #가독성_최고의_코드
                     </div>
                 </div>
@@ -354,16 +374,16 @@
                 <!-- Value 3: 긍정 회복탄력성 -->
                 <div class="glass-panel rounded-2xl p-8 glow-card-coral relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-coral-500/5 rounded-full blur-xl group-hover:bg-coral-500/10 transition-all"></div>
-                    <div class="w-12 h-12 bg-coral-500/10 text-coral-450 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
+                    <div class="w-12 h-12 bg-coral-500/10 text-coral-500 dark:text-coral-450 flex items-center justify-center rounded-xl mb-6 text-xl font-bold">
                         03
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-face-smile text-coral-450"></i> "그럴 수 있지!"
+                    <h3 class="text-xl font-bold text-slate-850 dark:text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-face-smile text-coral-500 dark:text-coral-450"></i> "어쩔 수 없지 뭐!"
                     </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        설계나 코드가 꼬였을 때 절대 주저앉지 않습니다. "그럴 수 있지 뭐, 새로 더 좋게 짜보자!"라며 가볍게 털어내고, 실패를 더 단단한 코드를 짜기 위한 완벽한 밑거름으로 탈바꿈시킵니다.
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                        설계나 코드가 꼬였을 때 절대 주저앉지 않습니다. "어쩔 수 없지 뭐, 새로 더 좋게 짜보자!"라며 가볍게 털어내고, 실패를 더 단단한 코드를 짜기 위한 완벽한 밑거름으로 탈바꿈시킵니다.
                     </p>
-                    <div class="text-xs text-coral-450 font-semibold uppercase tracking-wider">
+                    <div class="text-xs text-coral-500 dark:text-coral-450 font-semibold uppercase tracking-wider">
                         #멘탈갑_긍정에너지
                     </div>
                 </div>
@@ -375,21 +395,21 @@
     <section id="simulator" class="py-24 px-6 relative">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <span class="text-xs font-bold tracking-widest text-coral-450 uppercase bg-coral-500/10 px-3 py-1.5 rounded-full">
+                <span class="text-xs font-bold tracking-widest text-coral-500 dark:text-coral-450 uppercase bg-coral-500/10 px-3 py-1.5 rounded-full">
                     Interactive Zone
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-3">
                     태인이의 회복탄력성 시뮬레이터
                 </h2>
-                <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto">
                     SSAFY 과정 도중 에러가 터지고 프로젝트가 폭발하려는 순간, 김태인은 어떻게 대처할까요? 아래 '버그 발생'을 눌러서 극복해 보세요!
                 </p>
             </div>
 
-            <!-- Simulator UI Card -->
-            <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl border border-slate-700/50 transition-all duration-300" id="sim-window">
+            <!-- Simulator UI Card (Always keeps high-tech Dark look for beautiful contrast in light mode) -->
+            <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-300 dark:border-slate-700/50 bg-[#0B132B] text-slate-100 transition-all duration-300" id="sim-window">
                 <!-- Mac-like Header -->
-                <div class="bg-navy-800/80 px-6 py-3.5 flex items-center justify-between border-b border-slate-700/60">
+                <div class="bg-[#1C2541] px-6 py-3.5 flex items-center justify-between border-b border-[#3A506B]/50">
                     <div class="flex items-center space-x-2">
                         <span class="w-3 h-3 rounded-full bg-red-500"></span>
                         <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
@@ -402,27 +422,27 @@
                 <!-- Simulation Screen -->
                 <div class="p-6 md:p-8 font-mono text-sm leading-relaxed min-h-[320px] flex flex-col justify-between">
                     <!-- Console Area -->
-                    <div id="sim-console" class="space-y-3 max-h-[220px] overflow-y-auto pr-2">
+                    <div id="sim-console" class="space-y-3 max-h-[220px] overflow-y-auto pr-2 text-[#E2E8F0]">
                         <div class="text-slate-400">&gt; 시스템을 작동시킬 준비가 완료되었습니다.</div>
-                        <div class="text-neonGreen-400">&gt; npm run start:ssafy-project-final</div>
+                        <div class="text-[#10B981]">&gt; npm run start:ssafy-project-final</div>
                         <div class="text-slate-300">&gt; 서버가 성공적으로 오픈되었으며, 동료 개발자 김태인이 열심히 기능 개발 중입니다.</div>
                     </div>
 
                     <!-- Character State Overlay & CTA -->
-                    <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 bg-navy-900/50 p-4 rounded-xl">
+                    <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#1C2541]/50 p-4 rounded-xl">
                         <!-- Stats -->
                         <div class="flex space-x-6">
                             <div>
-                                <span class="text-xs text-slate-500 block">태인의 스트레스</span>
-                                <span id="stress-stat" class="font-bold text-lg text-neonGreen-400">0%</span>
+                                <span class="text-xs text-slate-400 block">태인의 스트레스</span>
+                                <span id="stress-stat" class="font-bold text-lg text-[#10B981]">0%</span>
                             </div>
                             <div>
-                                <span class="text-xs text-slate-500 block">코딩 퀄리티</span>
+                                <span class="text-xs text-slate-400 block">코딩 퀄리티</span>
                                 <span id="quality-stat" class="font-bold text-lg text-slate-300">100%</span>
                             </div>
                             <div>
-                                <span class="text-xs text-slate-500 block">회복 에너지</span>
-                                <span id="energy-stat" class="font-bold text-lg text-coral-450">100</span>
+                                <span class="text-xs text-slate-400 block">회복 에너지</span>
+                                <span id="energy-stat" class="font-bold text-lg text-[#FF6B6B]">100</span>
                             </div>
                         </div>
 
@@ -432,7 +452,7 @@
                                 🐛 에러 발생시키기
                             </button>
                             <button onclick="recoverBug()" id="recover-btn" class="flex-1 sm:flex-initial bg-gradient-to-r from-neonGreen-500 to-emerald-600 hover:from-neonGreen-600 hover:to-emerald-500 text-white font-bold px-5 py-2.5 rounded-lg active:scale-95 transition-all text-center hidden">
-                                🌟 "그럴 수 있지!" 외치기
+                                🌟 "어쩔 수 없지 뭐!" 외치기
                             </button>
                         </div>
                     </div>
@@ -442,51 +462,51 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 px-6 relative bg-navy-900/40">
+    <section id="portfolio" class="py-24 px-6 relative bg-slate-100/40 dark:bg-navy-900/40 transition-colors">
         <div class="max-w-4xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-12">
-                <span class="text-xs font-bold tracking-widest text-neonGreen-400 uppercase bg-neonGreen-500/10 px-3 py-1.5 rounded-full">
+                <span class="text-xs font-bold tracking-widest text-neonGreen-600 dark:text-neonGreen-400 uppercase bg-neonGreen-500/10 px-3 py-1.5 rounded-full">
                     Future Roadmap
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-4">
                     내가 이해하고 작성할 결과물
                 </h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-neonGreen-500 to-coral-500 mx-auto rounded"></div>
-                <p class="text-slate-400 mt-4 max-w-xl mx-auto text-sm md:text-base">
+                <p class="text-slate-500 dark:text-slate-400 mt-4 max-w-xl mx-auto text-sm md:text-base">
                     "가치관에 부끄럽지 않은 단단한 코드를 만드는 일, 혼자보다 '함께'일 때 더 큰 힘을 발휘합니다."
                 </p>
             </div>
 
             <!-- Beautiful Blank Canvas Card -->
-            <div class="glass-panel rounded-3xl p-8 md:p-12 text-center border-dashed border-2 border-slate-700 hover:border-neonGreen-500/50 transition-all duration-300 relative overflow-hidden group">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 text-center border-dashed border-2 border-slate-350 dark:border-slate-700 hover:border-neonGreen-500/50 transition-all duration-300 relative overflow-hidden group">
                 <!-- Background ambient lights -->
                 <div class="absolute -top-24 -left-24 w-48 h-48 bg-neonGreen-500/5 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-coral-500/5 rounded-full blur-3xl"></div>
 
                 <div class="max-w-2xl mx-auto z-10 relative">
                     <!-- Visual Icon -->
-                    <div class="w-20 h-20 bg-navy-800 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-700 shadow-xl group-hover:scale-110 group-hover:border-neonGreen-400/50 transition-all duration-500">
-                        <i class="fa-solid fa-puzzle-piece text-3xl text-neonGreen-400 animate-pulse"></i>
+                    <div class="w-20 h-20 bg-slate-200 dark:bg-navy-800 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-300 dark:border-slate-700 shadow-xl group-hover:scale-110 group-hover:border-neonGreen-400/50 transition-all duration-500">
+                        <i class="fa-solid fa-puzzle-piece text-3xl text-neonGreen-600 dark:text-neonGreen-400 animate-pulse"></i>
                     </div>
 
-                    <h3 class="text-2xl font-bold text-white mb-4">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-white mb-4">
                         "이곳은 아직 비어있는 도화지입니다"
                     </h3>
                     
-                    <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-8 text-left sm:text-center">
+                    <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-8 text-left sm:text-center">
                         SSAFY 서울 6반 과정을 거치며, 제가 완벽히 원리를 파악하고 한 땀 한 땀 작성한 견고한 프로젝트들이 이곳을 채우게 될 것입니다. 
-                        더 나아가 <span class="text-neonGreen-400 font-bold underline decoration-neonGreen-500/50 decoration-2">남은 여정 동안 여러분과 머리를 맞대고, 에러를 유쾌하게 극복해내며 만들어갈 협업의 결과물들</span>로 이 공간을 가득 완성하고 싶습니다.
+                        더 나아가 <span class="text-neonGreen-600 dark:text-neonGreen-400 font-bold underline decoration-neonGreen-500/50 decoration-2">남은 여정 동안 여러분과 머리를 맞대고, 에러를 유쾌하게 극복해내며 만들어갈 협업의 결과물들</span>로 이 공간을 가득 완성하고 싶습니다.
                     </p>
 
                     <!-- Interactive Idea Pitch Board -->
-                    <div class="bg-navy-950/80 p-6 rounded-2xl border border-slate-850 text-left max-w-lg mx-auto">
-                        <label class="block text-xs font-bold text-slate-400 mb-3 uppercase tracking-wider flex items-center gap-1.5">
+                    <div class="bg-white/80 dark:bg-navy-950/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-850 text-left max-w-lg mx-auto shadow-md">
+                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider flex items-center gap-1.5">
                             <span class="w-2 h-2 rounded-full bg-coral-500 animate-ping"></span> 태인과 채우고 싶은 프로젝트 아이디어 던지기
                         </label>
                         <div class="flex gap-2">
-                            <input type="text" id="idea-input" placeholder="예: '같이 알고리즘 스터디 서비스 만들어봐요!'" class="flex-1 bg-navy-800 border border-slate-700/80 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-coral-450 transition-all">
-                            <button onclick="pitchIdea()" class="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-500 text-white font-bold px-4 py-2.5 text-xs rounded-xl active:scale-95 transition-all">
+                            <input type="text" id="idea-input" placeholder="예: '같이 알고리즘 스터디 서비스 만들어봐요!'" class="flex-1 bg-slate-100 dark:bg-navy-800 border border-slate-300 dark:border-slate-700/80 rounded-xl px-4 py-2.5 text-xs text-slate-800 dark:text-white focus:outline-none focus:border-coral-500 dark:focus:border-coral-450 transition-all">
+                            <button onclick="pitchIdea()" class="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-500 text-white font-bold px-4 py-2.5 text-xs rounded-xl active:scale-95 transition-all whitespace-nowrap">
                                 보드에 등록
                             </button>
                         </div>
@@ -494,11 +514,11 @@
                         <!-- Dynamically populated Sticky Notes Board -->
                         <div id="ideas-board" class="mt-6 grid grid-cols-2 gap-3 max-h-[220px] overflow-y-auto pr-1">
                             <!-- Default Initial Sticky Note -->
-                            <div class="bg-gradient-to-br from-navy-900 to-navy-850 p-3.5 rounded-xl border border-slate-800 text-xs shadow-md flex flex-col justify-between h-28 relative overflow-hidden group">
-                                <span class="text-slate-450 leading-snug">💡 웹 프로젝트 협업 파트너 구함! 언제든 커피 챗 환영해요.</span>
+                            <div class="bg-yellow-50 dark:bg-gradient-to-br dark:from-navy-900 dark:to-navy-850 p-3.5 rounded-xl border border-yellow-200 dark:border-slate-800 text-xs shadow-md flex flex-col justify-between h-28 relative overflow-hidden group">
+                                <span class="text-slate-700 dark:text-slate-300 leading-snug">💡 웹 프로젝트 협업 파트너 구함! 언제든 커피 챗 환영해요.</span>
                                 <div class="flex justify-between items-center mt-3 text-[10px] text-slate-500">
                                     <span>By 김태인</span>
-                                    <span class="text-neonGreen-500 font-semibold">대기중</span>
+                                    <span class="text-neonGreen-600 dark:text-neonGreen-500 font-semibold">대기중</span>
                                 </div>
                             </div>
                         </div>
@@ -510,51 +530,51 @@
 
     <!-- Outro / Closing Section -->
     <section id="outro" class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#1e293b,transparent_70%)] opacity-40"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#e2e8f0,transparent_70%)] dark:bg-[radial-gradient(circle_at_bottom,#1e293b,transparent_70%)] opacity-40 transition-colors duration-300"></div>
         
         <div class="max-w-4xl mx-auto text-center z-10 relative">
             <!-- Icon -->
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-coral-500/10 text-coral-450 text-2xl mb-6">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-coral-500/10 text-coral-500 dark:text-coral-450 text-2xl mb-6">
                 <i class="fa-solid fa-graduation-cap"></i>
             </div>
             
-            <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
-                "오늘을 마지막처럼" 달리겠습니다
+            <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight text-slate-900 dark:text-white">
+                "매일을 마지막처럼 달리겠습니다"
             </h2>
             
-            <p class="max-w-2xl mx-auto text-base md:text-lg text-slate-400 leading-relaxed mb-12">
+            <p class="max-w-2xl mx-auto text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-12">
                 지쳐서 꼬인 에러도 유쾌하게 넘기는 힘, 더 명확하고 단단한 설계를 추구하는 집요함.<br>
                 함께 일할 때 가장 든든하고 신선한 에너지를 전하는 김태인과 함께,<br>
                 우리 남은 SSAFY 여정도 힘차게, 즐겁게 헤쳐 나가 봅시다!
             </p>
 
             <!-- Interaction Zone: Guest Cheers -->
-            <div class="max-w-md mx-auto bg-navy-900/60 p-6 rounded-2xl border border-slate-800 mb-12 text-left">
-                <h4 class="text-sm font-bold text-slate-300 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-paper-plane text-neonGreen-400"></i> 동료로서 태인님에게 한마디 남기기
+            <div class="max-w-md mx-auto bg-white/70 dark:bg-navy-900/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 mb-12 text-left shadow-lg">
+                <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-neonGreen-600 dark:text-neonGreen-400"></i> 동료로서 태인님에게 한마디 남기기
                 </h4>
                 <div class="flex gap-2">
-                    <input type="text" id="cheer-input" placeholder="오늘도 수고 많으십니다! (엔터 또는 클릭)" class="flex-1 bg-navy-800 border border-slate-700/80 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonGreen-500 transition-all">
+                    <input type="text" id="cheer-input" placeholder="오늘도 수고 많으십니다! (엔터 또는 클릭)" class="flex-1 bg-slate-100 dark:bg-navy-800 border border-slate-300 dark:border-slate-700/80 rounded-xl px-4 py-2.5 text-xs text-slate-850 dark:text-white focus:outline-none focus:border-neonGreen-500 transition-all">
                     <button onclick="submitCheer()" class="bg-neonGreen-500 hover:bg-neonGreen-600 text-navy-950 font-bold px-4 py-2.5 text-xs rounded-xl active:scale-95 transition-all">
                         전송
                     </button>
                 </div>
                 <!-- Mini feedback area for input -->
                 <div id="cheers-board" class="mt-4 space-y-2 hidden max-h-24 overflow-y-auto">
-                    <div class="text-[11px] text-slate-500 border-t border-slate-800 pt-2 font-mono">실시간 발송 기록 (로컬):</div>
+                    <div class="text-[11px] text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-800 pt-2 font-mono">실시간 발송 기록 (로컬):</div>
                 </div>
             </div>
 
-            <!-- Footer-like Info -->
-            <div class="border-t border-slate-800 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+            <!-- Footer Info -->
+            <div class="border-t border-slate-200 dark:border-slate-800 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
                 <div>
                     &copy; 2026. SSAFY Seoul Class 6 Kim Tae In. Built with 💙 and ☕.
                 </div>
                 <div class="flex space-x-6">
-                    <a href="javascript:void(0)" onclick="copyEmail()" class="hover:text-white transition-colors">
+                    <a href="javascript:void(0)" onclick="copyEmail()" class="hover:text-slate-900 dark:hover:text-white transition-colors">
                         <i class="fa-solid fa-envelope mr-1"></i> 이메일 복사
                     </a>
-                    <a href="https://github.com" target="_blank" class="hover:text-white transition-colors">
+                    <a href="https://github.com" target="_blank" class="hover:text-slate-900 dark:hover:text-white transition-colors">
                         <i class="fa-brands fa-github mr-1"></i> 깃허브
                     </a>
                 </div>
@@ -564,7 +584,50 @@
 
     <!-- Interactive Logic & Utilities -->
     <script>
-        // 1. Typing Slogans System
+        // 1. Dark & Light Theme Toggle System
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // Check if client previously preferred light mode, default is dark mode
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon) {
+                    themeIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
+                }
+            } else {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) {
+                    themeIcon.className = 'fa-solid fa-moon text-lg text-yellow-400';
+                }
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (isDark) {
+                // Switch to light mode
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                if (themeIcon) {
+                    themeIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
+                }
+            } else {
+                // Switch to dark mode
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                if (themeIcon) {
+                    themeIcon.className = 'fa-solid fa-moon text-lg text-yellow-400';
+                }
+            }
+        }
+
+        // Initialize theme instantly to avoid screen flash
+        initTheme();
+
+        // 2. Typing Slogans System
         const slogans = [
             "내가 이해한 걸 코드로 나타내자",
             "내가 알아볼 수 있는 코드를 짜자",
@@ -610,9 +673,13 @@
             const header = document.getElementById("main-header");
             window.addEventListener("scroll", () => {
                 if (window.scrollY > 20) {
-                    header.classList.add("bg-navy-950/85", "shadow-xl");
+                    if (document.documentElement.classList.contains('dark')) {
+                        header.classList.add("bg-navy-950/85", "shadow-xl");
+                    } else {
+                        header.classList.add("bg-white/85", "shadow-md");
+                    }
                 } else {
-                    header.classList.remove("bg-navy-950/85", "shadow-xl");
+                    header.classList.remove("bg-navy-950/85", "bg-white/85", "shadow-xl", "shadow-md");
                 }
             });
 
@@ -637,7 +704,7 @@
             }
         });
 
-        // 2. Interactive Resilience Simulator System
+        // 3. Interactive Resilience Simulator System
         let stress = 0;
         let quality = 100;
         let energy = 100;
@@ -663,7 +730,7 @@
                 row.className = "text-red-400 font-bold";
                 row.innerHTML = `&gt; ${message}`;
             } else if (type === 'success') {
-                row.className = "text-neonGreen-400 font-bold";
+                row.className = "text-[#10B981] font-bold";
                 row.innerHTML = `&gt; ${message}`;
             } else {
                 row.className = "text-slate-300";
@@ -707,8 +774,8 @@
         function recoverBug() {
             // Success glow transition
             if (simWindow) {
-                simWindow.classList.add("ring-2", "ring-neonGreen-400");
-                setTimeout(() => simWindow.classList.remove("ring-2", "ring-neonGreen-400"), 1000);
+                simWindow.classList.add("ring-2", "ring-neonGreen-500");
+                setTimeout(() => simWindow.classList.remove("ring-2", "ring-neonGreen-500"), 1000);
             }
 
             stress = Math.max(0, stress - 40);
@@ -717,19 +784,19 @@
 
             if (stressEl) {
                 stressEl.innerText = `${stress}%`;
-                stressEl.className = stress > 60 ? "font-bold text-lg text-red-500" : (stress > 20 ? "font-bold text-lg text-yellow-400" : "font-bold text-lg text-neonGreen-400");
+                stressEl.className = stress > 60 ? "font-bold text-lg text-red-500" : (stress > 20 ? "font-bold text-lg text-yellow-400" : "font-bold text-lg text-[#10B981]");
             }
             if (qualityEl) qualityEl.innerText = `${quality}%`;
             if (energyEl) energyEl.innerText = `${energy}`;
 
-            logToConsole("🗣️ 김태인: \"그럴 수 있지 뭐! 에러는 완벽한 기회다. 다시 고쳐보자!\"", "success");
+            logToConsole("🗣️ 김태인: \"어쩔 수 없지 뭐! 에러는 완벽한 기회다. 다시 고쳐보자!\"", "success");
             logToConsole("✨ 멘탈이 회복되었습니다! 코드가 더 안전하고 효율적으로 리팩토링 되었습니다.", "success");
 
             if (recoverBtn) recoverBtn.classList.add("hidden");
             if (bugBtn) bugBtn.classList.remove("hidden");
         }
 
-        // 3. User cheering submission
+        // 4. User cheering submission
         function submitCheer() {
             const input = document.getElementById("cheer-input");
             if (!input) return;
@@ -741,10 +808,10 @@
                 board.classList.remove("hidden");
 
                 const logRow = document.createElement("div");
-                logRow.className = "text-xs bg-navy-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50 flex justify-between items-center animate-fade-in";
+                logRow.className = "text-xs bg-slate-100 dark:bg-navy-800/80 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/50 flex justify-between items-center animate-fade-in";
                 logRow.innerHTML = `
-                    <span class="text-slate-300">${escapeHTML(text)}</span>
-                    <span class="text-[10px] text-neonGreen-400 font-mono">발송 완료!</span>
+                    <span class="text-slate-700 dark:text-slate-300">${escapeHTML(text)}</span>
+                    <span class="text-[10px] text-neonGreen-600 dark:text-neonGreen-400 font-mono">발송 완료!</span>
                 `;
                 board.appendChild(logRow);
                 board.scrollTop = board.scrollHeight;
@@ -760,7 +827,7 @@
             );
         }
 
-        // 4. Interactive Ideas Board Logic (Empty State Portfolio)
+        // 5. Interactive Ideas Board Logic (Generates theme adaptive sticky notes)
         function pitchIdea() {
             const input = document.getElementById("idea-input");
             if (!input) return;
@@ -770,12 +837,12 @@
             const board = document.getElementById("ideas-board");
             if (board) {
                 const newCard = document.createElement("div");
-                newCard.className = "bg-gradient-to-br from-navy-900 to-navy-850 p-3.5 rounded-xl border border-coral-500/20 text-xs shadow-md flex flex-col justify-between h-28 relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300 animate-fade-in";
+                newCard.className = "bg-green-50 dark:bg-gradient-to-br dark:from-navy-900 dark:to-navy-850 p-3.5 rounded-xl border border-green-200 dark:border-coral-500/20 text-xs shadow-md flex flex-col justify-between h-28 relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300 animate-fade-in";
                 newCard.innerHTML = `
-                    <span class="text-slate-300 leading-snug">${escapeHTML(text)}</span>
+                    <span class="text-slate-700 dark:text-slate-300 leading-snug">${escapeHTML(text)}</span>
                     <div class="flex justify-between items-center mt-3 text-[10px] text-slate-500">
                         <span>By 동료 학우</span>
-                        <span class="text-coral-450 font-semibold animate-pulse">🔥 제안됨</span>
+                        <span class="text-coral-500 dark:text-coral-450 font-semibold animate-pulse">🔥 제안됨</span>
                     </div>
                 `;
                 
