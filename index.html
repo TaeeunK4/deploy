@@ -271,7 +271,7 @@
                             <text x="195" y="270" fill="#4EFEBC">onBugTrigger()</text>
                             <text x="315" y="270" fill="#FFFFFF"> {</text>
                             <text x="140" y="300" fill="#FF8A7A">return</text>
-                            <text x="195" y="300" fill="#4EFEBC">"어쩔 수 없지 뭐, 고치자!"</text>
+                            <text x="195" y="300" fill="#4EFEBC">"그럴 수 있지, 고치자!"</text>
                             <text x="120" y="330" fill="#FFFFFF">}</g></rect>
                         </g>
                         
@@ -352,7 +352,7 @@
             <!-- Header of Section -->
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-                    My Core Values & Mindset
+                    나의 주요 포인트!
                 </h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-coral-500 to-neonGreen-500 mx-auto rounded"></div>
                 <p class="text-slate-500 dark:text-slate-400 mt-4 max-w-lg mx-auto text-sm md:text-base">
@@ -403,10 +403,10 @@
                         03
                     </div>
                     <h3 class="text-xl font-bold text-slate-850 dark:text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-face-smile text-coral-500 dark:text-coral-450"></i> "어쩔 수 없지 뭐!"
+                        <i class="fa-solid fa-face-smile text-coral-500 dark:text-coral-450"></i> "그럴 수 있지!"
                     </h3>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                        설계나 코드가 꼬였을 때 절대 주저앉지 않습니다. "어쩔 수 없지 뭐, 새로 더 좋게 짜보자!"라며 가볍게 털어내고, 실패를 더 단단한 코드를 짜기 위한 완벽한 밑거름으로 탈바꿈시킵니다.
+                        설계나 코드가 꼬였을 때 절대 주저앉지 않습니다. "그럴 수 있지 뭐, 새로 더 좋게 짜보자!"라며 가볍게 털어내고, 실패를 더 단단한 코드를 짜기 위한 완벽한 밑거름으로 탈바꿈시킵니다.
                     </p>
                     <div class="text-xs text-coral-500 dark:text-coral-450 font-semibold uppercase tracking-wider">
                         #멘탈갑_긍정에너지
@@ -477,7 +477,7 @@
                                 🐛 에러 발생시키기
                             </button>
                             <button onclick="recoverBug()" id="recover-btn" class="flex-1 lg:flex-initial bg-gradient-to-r from-neonGreen-500 to-emerald-600 hover:from-neonGreen-600 hover:to-emerald-500 text-white font-bold px-5 py-3 rounded-xl active:scale-95 transition-all text-center text-xs sm:text-sm hidden">
-                                🌟 "어쩔 수 없지 뭐!" 외치기
+                                🌟 "그럴 수 있지!" 외치기
                             </button>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
             </div>
             
             <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight text-slate-900 dark:text-white">
-                "매일을 마지막처럼 달리겠습니다"
+                "오늘을 마지막처럼" 달리겠습니다
             </h2>
             
             <p class="max-w-2xl mx-auto text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-12">
@@ -654,9 +654,8 @@
 
         // 2. Typing Slogans System
         const slogans = [
-            "내가 이해한 걸 코드로 나타내자",
-            "내가 알아볼 수 있는 코드를 짜자",
-            "오늘 하루를 마지막처럼 즐기자"
+            "내가 이해한 걸 코드로",
+            "내가 알아볼 수 있는 코드를"
         ];
         let sloganIndex = 0;
         let charIndex = 0;
@@ -876,7 +875,7 @@
             if (qualityEl) qualityEl.innerText = `${quality}%`;
             if (energyEl) energyEl.innerText = `${energy}`;
 
-            logToConsole("🗣️ 김태인: \"어쩔 수 없지 뭐! 에러는 완벽한 기회다. 다시 고쳐보자!\"", "success");
+            logToConsole("🗣️ 김태인: \"그럴 수 있지 뭐! 에러는 완벽한 기회다. 다시 고쳐보자!\"", "success");
             logToConsole("✨ 멘탈이 회복되었습니다! 코드가 더 안전하고 효율적으로 리팩토링 되었습니다.", "success");
 
             if (recoverBtn) recoverBtn.classList.add("hidden");
