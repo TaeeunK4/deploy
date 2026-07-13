@@ -149,6 +149,16 @@
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-navy-950 dark:text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-coral-500 selection:text-white transition-colors duration-300">
 
+    <!-- Parallax Background Lights (Subtle Blurred Blobs) -->
+    <div id="parallax-bg-1" class="absolute pointer-events-none z-0 w-[500px] h-[500px] bg-coral-500/10 dark:bg-coral-500/5 rounded-full blur-[120px] transition-colors duration-300" style="top: 15%; left: -10%;"></div>
+    <div id="parallax-bg-2" class="absolute pointer-events-none z-0 w-[600px] h-[600px] bg-neonGreen-500/10 dark:bg-neonGreen-500/5 rounded-full blur-[150px] transition-colors duration-300" style="top: 45%; right: -15%;"></div>
+    <div id="parallax-bg-3" class="absolute pointer-events-none z-0 w-[400px] h-[400px] bg-coral-500/10 dark:bg-coral-500/5 rounded-full blur-[100px] transition-colors duration-300" style="top: 75%; left: 5%;"></div>
+
+    <!-- Floating Code Symbols (Parallax Depth Layer) -->
+    <div id="parallax-text-1" class="hidden md:block absolute pointer-events-none z-0 font-mono text-8xl font-bold text-slate-200/40 dark:text-slate-800/15 select-none transition-colors duration-300" style="top: 25%; right: 10%;">&lt;/&gt;</div>
+    <div id="parallax-text-2" class="hidden md:block absolute pointer-events-none z-0 font-mono text-9xl font-bold text-slate-200/40 dark:text-slate-800/15 select-none transition-colors duration-300" style="top: 55%; left: 8%;">{ }</div>
+    <div id="parallax-text-3" class="hidden md:block absolute pointer-events-none z-0 font-mono text-7xl font-bold text-slate-200/40 dark:text-slate-800/15 select-none transition-colors duration-300" style="top: 80%; right: 12%;">const</div>
+
     <!-- Navigation Header -->
     <header class="fixed top-0 w-full z-50 glass-panel transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -669,6 +679,41 @@
         document.addEventListener("DOMContentLoaded", () => {
             type();
             
+            const bg1 = document.getElementById('parallax-bg-1');
+            const bg2 = document.getElementById('parallax-bg-2');
+            const bg3 = document.getElementById('parallax-bg-3');
+            const txt1 = document.getElementById('parallax-text-1');
+            const txt2 = document.getElementById('parallax-text-2');
+            const txt3 = document.getElementById('parallax-text-3');
+
+            let ticking = false;
+
+            function updateParallax() {
+                const scrollY = window.scrollY;
+                
+                // Translate backgrounds and floating texts at different speeds
+                if (bg1) bg1.style.transform = `translateY(${scrollY * 0.15}px)`;
+                if (bg2) bg2.style.transform = `translateY(${scrollY * -0.1}px)`;
+                if (bg3) bg3.style.transform = `translateY(${scrollY * 0.08}px)`;
+                
+                if (txt1) txt1.style.transform = `translateY(${scrollY * 0.25}px) rotate(${scrollY * 0.05}deg)`;
+                if (txt2) txt2.style.transform = `translateY(${scrollY * 0.12}px) rotate(${scrollY * -0.03}deg)`;
+                if (txt3) txt3.style.transform = `translateY(${scrollY * 0.18}px) rotate(${scrollY * 0.02}deg)`;
+
+                ticking = false;
+            }
+
+            // High performance scroll listener using requestAnimationFrame
+            window.addEventListener("scroll", () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateParallax();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
             // Dynamic Navbar blur on scroll
             const header = document.getElementById("main-header");
             window.addEventListener("scroll", () => {
